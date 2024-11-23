@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I'm Sorry 💖</title>
+    <style>
+        /* General Reset */
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            font-family: 'Dancing Script', cursive;
+        }
+
+        /* Background Styling */
+        body {
+            background: radial-gradient(circle, #fce3ec, #fbb9d3, #f98abc);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            perspective: 2000px;
+        }
+
+        /* Floating Hearts Animation */
+        .floating-hearts {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .floating-hearts span {
+            position: absolute;
+            display: block;
+            width: 20px;
+            height: 20px;
+            background: pink;
+            opacity: 0.7;
+            animation: floatHearts 8s infinite ease-in-out;
+        }
+
+        @keyframes floatHearts {
+            0% {
+                transform: translateY(100vh) scale(0.8);
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-20vh) scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        /* Randomize Hearts */
+        .floating-hearts span:nth-child(1) {
+            left: 10%;
+            animation-delay: 0s;
+            animation-duration: 6s;
+        }
+
+        .floating-hearts span:nth-child(2) {
+            left: 25%;
+            animation-delay: 2s;
+            animation-duration: 9s;
+        }
+
+        .floating-hearts span:nth-child(3) {
+            left: 50%;
+            animation-delay: 1.5s;
+            animation-duration: 7s;
+        }
+
+        .floating-hearts span:nth-child(4) {
+            left: 75%;
+            animation-delay: 0.5s;
+            animation-duration: 8s;
+        }
+
+        .floating-hearts span:nth-child(5) {
+            left: 90%;
+            animation-delay: 3s;
+            animation-duration: 10s;
+        }
+
+        /* Envelope Container */
+        .envelope-container {
+            position: relative;
+            width: 400px;
+            height: 300px;
+            transform-style: preserve-3d;
+            animation: popIn 1.5s ease-in-out;
+        }
+
+        @keyframes popIn {
+            0% {
+                transform: scale(0.5);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* Envelope Design */
+        .envelope {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: transform 1s ease-in-out;
+        }
+
+        .flap {
+            position: absolute;
+            width: 100%;
+            height: 50%;
+            background: linear-gradient(145deg, #f98abc, #f77eb9);
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            transform-origin: top;
+            transform: rotateX(0deg);
+            transition: transform 1s ease-in-out;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: white;
+            border-radius: 10px;
+            transform: rotateX(-180deg);
+            transition: transform 1s ease-in-out;
+            border: 2px solid #f77eb9;
+            box-shadow: 0 5px 20px rgba(255, 0, 119, 0.3);
+        }
+
+        /* Inner Message */
+        .message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 85%;
+            padding: 20px;
+            background: #fffafc;
+            border-radius: 10px;
+            text-align: center;
+            transform: translate(-50%, -50%) scale(0.8);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.8s ease, transform 0.8s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .message h1 {
+            font-size: 28px;
+            color: #f77eb9;
+            margin-bottom: 10px;
+        }
+
+        .message p {
+            font-size: 18px;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        /* Opened Envelope */
+        .envelope.open .flap {
+            transform: rotateX(-180deg);
+        }
+
+        .envelope.open .back {
+            transform: rotateX(0deg);
+        }
+
+        .envelope.open .message {
+            opacity: 1;
+            visibility: visible;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        /* Glow Effect */
+        .envelope-container:hover .envelope {
+            box-shadow: 0 0 30px rgba(247, 126, 185, 0.6);
+        }
+
+        /* Button */
+        .button {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 12px 20px;
+            background: linear-gradient(135deg, #f77eb9, #f9a8d4);
+            color: white;
+            font-size: 16px;
+            font-family: 'Poppins', sans-serif;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 5px 10px rgba(247, 126, 185, 0.5);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.5s ease;
+        }
+
+        .envelope.open + .button {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 20px rgba(247, 126, 185, 0.8);
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="floating-hearts">
+        <span></span><span></span><span></span><span></span><span></span>
+    </div>
+    <div class="envelope-container">
+        <div class="envelope" onclick="openEnvelope()">
+            <div class="flap"></div>
+            <div class="back">
+                <div class="message">
+                    <h1>I'm Sorry 💖</h1>
+                    <p>
+                        To the most beautiful person in my life,<br>
+                        I made a mistake, and it hurts me deeply.<br>
+                        Please forgive me, my heart aches without you.<br>
+                        I promise to make things right and cherish<br>
+                        every moment with you forever. ❤️<br><br>
+                        With all my love,<br>
+                        <strong>Me 🥺</strong>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button class="button" onclick="resetEnvelope()">Replay Animation</button>
+
+    <script>
+        function openEnvelope() {
+            const envelope = document.querySelector('.envelope');
+            envelope.classList.add('open');
+        }
+
+        function resetEnvelope() {
+            const envelope = document.querySelector('.envelope');
+            envelope.classList.remove('open');
+        }
+    </script>
+</body>
+</html>
